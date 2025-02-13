@@ -79,10 +79,10 @@ display_space(){
 }
 
 ensure_config() {
-	if [ ! -f $INPUT_FILE ] ; then
+	if [ ! -f "$INPUT_FILE" ] ; then
 		echo "try to copy $INPUT_FILE"
-		mkdir -p $(dirname $INPUT_FILE)
-		curl -fsSL https://raw.githubusercontent.com/BWG31/ShazamClean/refs/heads/main/cleaning_list.txt > $INPUT_FILE
+		mkdir -p $(dirname "$INPUT_FILE")
+		curl -fsSL https://raw.githubusercontent.com/BWG31/ShazamClean/refs/heads/main/cleaning_list.txt > "$INPUT_FILE"
 	fi
 }
 
