@@ -14,7 +14,7 @@ mkdir -p "$INSTALL_DIR"
 
 if [ -e "$COMMAND_SCRIPT" ] && [ -e "$CLEANING_LIST" ]; then
 	echo "Creating executable command..."
-	cp "$COMMAND_SCRIPT" "$INSTALL_DIR/"
+	cp "$COMMAND_SCRIPT" "$INSTALL_DIR/"	
 	cp "$CLEANING_LIST" "$INSTALL_DIR/"
 	cp "$UNINSTALL_FILE" "$INSTALL_DIR/"
 	chmod +x "$INSTALL_DIR/$COMMAND_SCRIPT"

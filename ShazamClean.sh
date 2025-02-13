@@ -1,7 +1,6 @@
 #!/bin/bash
 
-INSTALL_DIR="$HOME/.config/ShazamClean"
-INPUT_FILE="$INSTALL_DIR/cleaning_list.txt"
+INPUT_FILE="$HOME/.config/ShazamClean/cleaning_list.txt"
 
 GREEN="\033[0;92m"
 YELLOW="\033[0;93m"
@@ -79,19 +78,32 @@ display_space(){
 	df -h | grep $USER | awk '{print $4}'
 }
 
-#main script
-echo -e $YELLOW"Cleaning..."$RESET
-sleep 0.5
-SPACE_BEFORE=$(display_space)
-echo "=============================="
-process_directories_from_file "$INPUT_FILE"
-echo "=============================="
-echo -e $GREEN"Clean complete!"$RESET
-sleep 0.5
-echo "=============================="
-echo -e $BOLD"Total home size:\t" $(df -h | grep $USER | awk '{print $2}') $RESET
-echo -e $BOLD_RED"Free space before:\t" $SPACE_BEFORE $RESET
-echo -e $BOLD_GREEN"Free space after:\t" $(display_space) $RESET
-echo "=============================="
-echo -e $CYAN"Edit cleaning list here: $INPUT_FILE" $RESET
-echo -e $ITALIC_YELLOW "by Shazam ⚡︎bgolding (42Lausanne)" $RESET
+ensure_config() {
+	if [ -f $INPUT_FILE] ; then
+		return
+	else
+		mkdir -p $(dirname $INPUT_FILE)
+		"$(curl -fsSL https://raw.githubusercontent.com/BWG31/ShazamClean/refs/heads/main/cleaning_list.txt)" > $INPUT_FILE
+	fi
+}
+
+main() {
+	ensure_config
+	echo -e $YELLOW"Cleaning..."$RESET
+	sleep 0.5
+	SPACE_BEFORE=$(display_space)
+	echo "=============================="
+	process_directories_from_file "$INPUT_FILE"
+	echo "=============================="
+	echo -e $GREEN"Clean complete!"$RESET
+	sleep 0.5
+	echo "=============================="
+	echo -e $BOLD"Total home size:\t" $(df -h | grep $USER | awk '{print $2}') $RESET
+	echo -e $BOLD_RED"Free space before:\t" $SPACE_BEFORE $RESET
+	echo -e $BOLD_GREEN"Free space after:\t" $(display_space) $RESET
+	echo "=============================="
+	echo -e $CYAN"Edit cleaning list here: $INPUT_FILE" $RESET
+	echo -e $ITALIC_YELLOW "by Shazam ⚡︎bgolding (42Lausanne)" $RESET
+}
+
+main

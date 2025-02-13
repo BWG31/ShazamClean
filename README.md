@@ -1,6 +1,11 @@
 # ShazamClean
 A cleaner script to free up space on the Linux sessions of 42Lausanne.
 
+# Remote execution
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/BWG31/ShazamClean/refs/heads/main/ShazamClean.sh)"
+```
+
 # Install
  - Run the following to install:
 	```sh
