@@ -83,7 +83,7 @@ ensure_config() {
 		return
 	else
 		mkdir -p $(dirname $INPUT_FILE)
-		"$(curl -fsSL https://raw.githubusercontent.com/BWG31/ShazamClean/refs/heads/main/cleaning_list.txt)" > $INPUT_FILE
+		curl -fsSL https://raw.githubusercontent.com/BWG31/ShazamClean/refs/heads/main/cleaning_list.txt > $INPUT_FILE
 	fi
 }
 
